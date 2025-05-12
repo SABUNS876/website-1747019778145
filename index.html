@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Topup Codashop</title>
+<style>
+  /* Reset and basic styling */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  h1 {
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+  }
+  p.subtitle {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    color: #c2c2c2;
+    text-align: center;
+    max-width: 400px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+  }
+  form {
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 25px 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow:
+      0 8px 32px 0 rgba(31, 38, 135, 0.37),
+      inset 0 -4px 8px 0 rgba(255, 255, 255, 0.2);
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+  }
+  input, select {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    transition: background 0.3s ease;
+  }
+  input::placeholder {
+    color: #ccc;
+  }
+  input:focus, select:focus {
+    background: rgba(255,255,255,0.3);
+  }
+  button {
+    width: 100%;
+    padding: 12px 0;
+    background: #ff7e5f;
+    background: linear-gradient(45deg, #ff7e5f, #feb47b);
+    border: none;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(255, 126, 95, 0.4);
+    transition: background 0.4s ease;
+  }
+  button:hover {
+    background: linear-gradient(45deg, #ff6a3a, #feb06b);
+  }
+  .response {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.15);
+    font-weight: 600;
+    text-align: center;
+    user-select: text;
+    min-height: 42px;
+  }
+  @media (max-width: 400px) {
+    h1 {
+      font-size: 2rem;
+    }
+    form {
+      padding: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>Topup Codashop</h1>
+  <p class="subtitle">Isi pulsa dan voucher game favoritmu dengan mudah dan cepat menggunakan Codashop API.</p>
+  <form id="topupForm">
+    <label for="phone">Nomor HP / ID Game</label>
+    <input type="text" id="phone" name="phone" placeholder="Contoh: 081234567890 atau GameID123" required minlength="4" />
+    <label for="voucher">Pilih Voucher</label>
+    <select id="voucher" name="voucher" required>
+      <option value="" disabled selected>Pilih voucher</option>
+      <option value="game_1000">Voucher 10.000</option>
+      <option value="game_2000">Voucher 20.000</option>
+      <option value="game_5000">Voucher 50.000</option>
+      <option value="game_10000">Voucher 100.000</option>
+    </select>
+    <button type="submit">Topup Sekarang</button>
+    <div class="response" id="response"></div>
+  </form>
+<script>
+  // Codashop API key (This is a placeholder API key; replace it with your actual API key to make real requests)
+  const API_KEY = 'YOUR_CODASHOP_API_KEY_HERE';
+
+  // Demo API url (example, the real official Codashop API is private and requires partnership)
+  // For demonstration, using a mock request to show how the API call would be done
+  // The below endpoint and parameters are fictional for illustration purposes only.
+
+  const form = document.getElementById('topupForm');
+  const responseDiv = document.getElementById('response');
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    responseDiv.style.color = '#fff';
+    responseDiv.textContent = 'Memproses topup...';
+
+    const phone = form.phone.value.trim();
+    const voucher = form.voucher.value;
+
+    if (!API_KEY || API_KEY === 'YOUR_CODASHOP_API_KEY_HERE') {
+      responseDiv.style.color = '#f44336';
+      responseDiv.textContent = 'API key belum diatur. Silakan gunakan API key Codashop Anda.';
+      return;
+    }
+
+    const data = {
+      api_key: API_KEY,
+      phone: phone,
+      voucher: voucher
+    };
+
+    try {
+      // Fake fetch request to simulate the API call — replace with actual API url and parameters
+      // Uncomment and adjust below line if you have a real API endpoint
+      /*
+      const res = await fetch('https://api.codashop.com/topup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + API_KEY
+        },
+        body: JSON.stringify({ phone, voucher })
+      });
+      const result = await res.json();
+      */
+      // Simulated API response
+      await new Promise(r => setTimeout(r, 1500));
+      const result = {
+        success: true,
+        order_id: 'ORDER' + Math.floor(Math.random()*900000+100000),
+        message: `Topup voucher ${voucher} untuk nomor ${phone} berhasil!`
+      };
+
+      if (result.success) {
+        responseDiv.style.color = '#4caf50';
+        responseDiv.textContent = `✅ ${result.message} (ID Order: ${result.order_id})`;
+      } else {
+        responseDiv.style.color = '#f44336';
+        responseDiv.textContent = `✖ Gagal: ${result.message || 'Terjadi kesalahan'}`;
+      }
+    } catch (err) {
+      responseDiv.style.color = '#f44336';
+      responseDiv.textContent = `✖ Terjadi kesalahan: ${err.message}`;
+    }
+
+  });
+</script>
+</body>
+</html>
+
+```
